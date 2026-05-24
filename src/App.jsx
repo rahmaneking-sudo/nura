@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast'
 const Landing = lazy(() => import('@/pages/Landing'))
 const Quiz = lazy(() => import('@/pages/Quiz'))
 const Resultats = lazy(() => import('@/pages/Resultats'))
+const AdminPanel = lazy(() => import('@/pages/AdminPanel'))
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
                 <Route path="/" element={<Landing />} />
                 <Route path="/quiz/:moduleId" element={<Quiz />} />
                 <Route path="/resultats/:moduleId" element={<Resultats />} />
+                <Route path="/admin" element={<AdminPanel />} />
               </Routes>
             </main>
           </Suspense>

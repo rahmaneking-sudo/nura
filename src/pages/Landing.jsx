@@ -59,34 +59,47 @@ export default function Landing() {
         <meta name="description" content="210 questions islamiques selon l'école malékite. Sourcées du Coran, du Muwatta d'Imam Malik et de la Sunna. En français et en wolof. Gratuit." />
       </Helmet>
       
-      <section className="relative pt-20 pb-16 px-4 overflow-hidden bg-emerald-dark text-white text-center">
+      <section className="relative pt-20 pb-16 px-4 overflow-hidden bg-emerald-dark text-white">
         <ParticlesCanvas />
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold mb-6 font-sans text-white"
+        <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="flex-1 text-center md:text-left">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-sans text-white leading-tight"
+            >
+              Découvre ta <span className="text-gold block mt-2">compatibilité islamique</span>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-lg md:text-xl text-emerald-light mb-10 max-w-xl mx-auto md:mx-0"
+            >
+              Quiz sérieux selon l'école malékite · En français et en wolof. 
+              Découvrez si vous partagez les mêmes valeurs spirituelles avant de vous engager.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <a href="#modules" className="inline-block bg-gold text-emerald-dark font-semibold px-8 py-4 rounded-nura shadow-gold hover:bg-gold-light transition-all transform hover:scale-105">
+                Commencer le quiz
+              </a>
+            </motion.div>
+          </div>
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="flex-1 hidden md:block"
           >
-            Découvre ta <span className="text-gold">compatibilité islamique</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-lg md:text-xl text-emerald-light mb-10 max-w-2xl mx-auto"
-          >
-            Quiz sérieux selon l'école malékite · En français et en wolof. 
-            Découvrez si vous partagez les mêmes valeurs spirituelles avant de vous engager.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            <a href="#modules" className="inline-block bg-gold text-emerald-dark font-semibold px-8 py-4 rounded-nura shadow-gold hover:bg-gold-light transition-all transform hover:scale-105">
-              Commencer le quiz
-            </a>
+            <div className="relative w-full max-w-md mx-auto aspect-square rounded-[3rem] overflow-hidden shadow-[0_0_40px_rgba(245,200,66,0.3)] animate-float border-4 border-emerald-primary/30">
+              <img src="/illustration.png" alt="Couples musulmans" className="w-full h-full object-cover" />
+            </div>
           </motion.div>
         </div>
       </section>
