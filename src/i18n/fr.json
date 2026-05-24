@@ -1,0 +1,24 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "quiz": "Quiz",
+    "about": "À propos",
+    "contact": "Contact",
+    "login": "Se connecter avec Google"
+  },
+  "hero": {
+    "verset": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا",
+    "traduction": "Et parmi Ses signes, Il a créé pour vous des épouses afin que vous viviez en tranquillité avec elles — Ar-Rum 30:21",
+    "titre": "Découvre ta compatibilité islamique",
+    "soustitre": "Quiz sérieux selon l'école malékite · En français et en wolof",
+    "cta": "Commencer le quiz",
+    "cta2": "Se connecter avec Google"
+  },
+  "quiz": {
+    "question": "Question",
+    "sur": "/",
+    "essaie": "Essaie encore — tu as une dernière chance !",
+    "bonne": "Mashallah ! Bonne réponse",
+    "mauvaise": "La bonne réponse :"
+  }
+}
