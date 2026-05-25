@@ -6,7 +6,6 @@ import { Volume2, PlayCircle } from 'lucide-react'
 import { useQuizStore } from '@/store/quizStore'
 import { useAuthStore } from '@/store/authStore'
 import { useVoiceSpeech } from '@/hooks/useVoiceSpeech'
-import { saveModuleScore } from '@/firebase/firestore'
 import { MODULES } from '@/data'
 import OptionButton from '@/components/quiz/OptionButton'
 import ExplicationBlock from '@/components/quiz/ExplicationBlock'
@@ -121,8 +120,7 @@ export default function Quiz() {
                     if (nextIndex >= questions.length) {
                       terminer();
                       if (user) {
-                        const finalScore = Object.values(optionStates).includes('correct') ? scoreConnaissance + 1 : scoreConnaissance;
-                        saveModuleScore(user.uid, moduleId, finalScore, scoreCompatibilite);
+                        // Supabase score tracking will go here
                       }
                       navigate(`/resultats/${moduleId}`);
                     } else {
