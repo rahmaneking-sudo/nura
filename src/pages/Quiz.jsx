@@ -76,16 +76,17 @@ export default function Quiz() {
             <span className="bg-emerald-light text-emerald-primary text-xs px-3 py-1 rounded-full font-medium">
               {question.categorie}
             </span>
-            <button 
-              onClick={() => {
-                const textToSpeak = i18n.language === 'wo' && question.questionWo ? question.questionWo : question.question;
-                speak(textToSpeak, 'fr-FR')
-              }}
-              className="flex items-center gap-2 px-3 py-1 bg-emerald-light text-emerald-primary rounded-full hover:bg-emerald-primary hover:text-white transition-colors"
-            >
-              <Volume2 size={16} />
-              <span className="text-xs font-medium uppercase">Écouter</span>
-            </button>
+            {i18n.language !== 'wo' && (
+              <button 
+                onClick={() => {
+                  speak(question.question, 'fr-FR')
+                }}
+                className="flex items-center gap-2 px-3 py-1 bg-emerald-light text-emerald-primary rounded-full hover:bg-emerald-primary hover:text-white transition-colors"
+              >
+                <Volume2 size={16} />
+                <span className="text-xs font-medium uppercase">Écouter</span>
+              </button>
+            )}
           </div>
         </div>
 
