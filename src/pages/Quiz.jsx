@@ -51,7 +51,7 @@ export default function Quiz() {
         } else {
           nextQuestion()
         }
-      }, 2800)
+      }, 8000)
     } else {
       addTentative()
       setOptionStates(s => ({ ...s, [option.texte]: 'wrong' }))
@@ -67,7 +67,7 @@ export default function Quiz() {
           } else {
             nextQuestion()
           }
-        }, 3500)
+        }, 8000)
       } else {
         toast('Essaie encore — tu as une dernière chance !', { icon: '💡' })
       }
