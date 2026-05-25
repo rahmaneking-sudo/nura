@@ -109,7 +109,7 @@ export default function Landing() {
       <section id="modules" className="py-16 px-4 bg-nura-bg">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-emerald-dark mb-4">Les 7 modules d'apprentissage</h2>
+            <h2 className="text-3xl font-bold text-emerald-dark mb-4">Les {Object.keys(MODULES).length} modules d'apprentissage</h2>
             <p className="text-nura-muted max-w-2xl mx-auto">Chaque module est conçu pour tester vos connaissances et votre compatibilité sur un aspect crucial du mariage islamique.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
