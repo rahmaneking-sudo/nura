@@ -5,8 +5,9 @@
     "login": "Sàkk ak Google"
   },
   "hero": {
-    "titre": "Xam sa jëf ci Islam",
-    "soustitre": "Quiz bu dëgër ci Coran ak Sunna · Ci français ak wolof",
+    "titre": "Nattal sa",
+    "titre_highlight": "xam-xam ci l'Islam",
+    "soustitre": "Quiz bu dëgër ci ngiir mbirum diine · Ci français ak wolof. Ngir def ko sa bopp, ak say xarit wala ak sa jëkkër/jabar ngir jàng.",
     "cta": "Tambali quiz bi"
   },
   "quiz": {

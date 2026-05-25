@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import ParticlesCanvas from '@/components/landing/ParticlesCanvas'
 import TestimonialsCarousel from '@/components/landing/TestimonialsCarousel'
 import AdSenseBlock from '@/components/ui/AdSenseBlock'
 import { MODULES } from '@/data'
 
 export default function Landing() {
+  const { t } = useTranslation()
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -29,7 +32,7 @@ export default function Landing() {
               transition={{ delay: 0.2 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-sans text-white leading-tight"
             >
-              Testez vos <span className="text-gold block mt-2">connaissances islamiques</span>
+              {t('hero.titre')} <span className="text-gold block mt-2">{t('hero.titre_highlight')}</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -37,8 +40,7 @@ export default function Landing() {
               transition={{ delay: 0.4 }}
               className="text-lg md:text-xl text-emerald-light mb-10 max-w-xl mx-auto md:mx-0"
             >
-              Quiz sérieux selon l'école malékite · En français et en wolof. 
-              À faire seul, entre amis ou en couple pour apprendre et partager ensemble dans la bonne humeur.
+              {t('hero.soustitre')}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -46,7 +48,7 @@ export default function Landing() {
               transition={{ delay: 0.6 }}
             >
               <a href="#modules" className="inline-block bg-gold text-emerald-dark font-semibold px-8 py-4 rounded-nura shadow-gold hover:bg-gold-light transition-all transform hover:scale-105">
-                Commencer le quiz
+                {t('hero.cta')}
               </a>
             </motion.div>
           </div>
@@ -57,9 +59,19 @@ export default function Landing() {
             transition={{ delay: 0.5, duration: 0.8 }}
             className="flex-1 hidden md:block"
           >
-            <div className="relative w-full max-w-md mx-auto aspect-square rounded-[3rem] overflow-hidden shadow-[0_0_40px_rgba(245,200,66,0.3)] animate-float border-4 border-emerald-primary/30">
-              <img src="/illustration.png" alt="Couples musulmans" className="w-full h-full object-cover" />
-            </div>
+            <motion.div 
+              animate={{ y: [0, -15, 0], rotate: [0, 2, -2, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full max-w-md mx-auto aspect-square rounded-[3rem] overflow-hidden shadow-[0_0_40px_rgba(245,200,66,0.3)] border-4 border-emerald-primary/30"
+            >
+              <motion.img 
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                src="/illustration.png" 
+                alt="Couples musulmans" 
+                className="w-full h-full object-cover" 
+              />
+            </motion.div>
           </motion.div>
         </div>
       </section>
