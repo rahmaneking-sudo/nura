@@ -28,7 +28,6 @@ export default function Navbar() {
           >
             {i18n.language === 'fr' ? 'WO' : 'FR'}
           </button>
-          <Link to="/admin" className="text-xs text-nura-muted opacity-30 hover:opacity-100 hover:text-emerald-primary transition-all">Admin</Link>
         </div>
       </div>
     </motion.nav>

@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
-import { Volume2, VolumeX } from 'lucide-react'
+import { Volume2, PlayCircle } from 'lucide-react'
 import { useQuizStore } from '@/store/quizStore'
 import { useAuthStore } from '@/store/authStore'
 import { useVoiceSpeech } from '@/hooks/useVoiceSpeech'
@@ -12,12 +12,14 @@ import OptionButton from '@/components/quiz/OptionButton'
 import ExplicationBlock from '@/components/quiz/ExplicationBlock'
 import ProgressBar from '@/components/ui/ProgressBar'
 import { shuffle } from '@/utils/shuffle'
+import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
 
 export default function Quiz() {
   const { moduleId } = useParams()
   const navigate = useNavigate()
   const { speak, stop } = useVoiceSpeech()
+  const { i18n } = useTranslation()
   const user = useAuthStore(s => s.user)
   const { questionActuelle, tentatives, scoreConnaissance, scoreCompatibilite,
     setModule, nextQuestion, addTentative, addScore, addReponse, terminer } = useQuizStore()
@@ -27,15 +29,15 @@ export default function Quiz() {
   const question = questions[questionActuelle]
   const [optionStates, setOptionStates] = useState({})
   const [explicationVisible, setExplicationVisible] = useState(false)
-  const [isVocalOn, setIsVocalOn] = useState(false)
+  const [explicationVisible, setExplicationVisible] = useState(false)
 
   useEffect(() => { if (moduleId) setModule(moduleId) }, [moduleId, setModule])
 
   useEffect(() => {
     setOptionStates({})
     setExplicationVisible(false)
-    if (isVocalOn && question) speak(question.question)
-  }, [questionActuelle, isVocalOn, question, speak])
+    stop()
+  }, [questionActuelle, question, stop])
 
   const handleOptionClick = (option) => {
     if (option.correct !== false && (option.correct || question.type === 'compatibilite')) {
@@ -75,9 +77,15 @@ export default function Quiz() {
             <span className="bg-emerald-light text-emerald-primary text-xs px-3 py-1 rounded-full font-medium">
               {question.categorie}
             </span>
-            <button onClick={() => { setIsVocalOn(!isVocalOn); isVocalOn ? stop() : speak(question.question) }}
-              className="p-2 rounded-full hover:bg-emerald-light transition-colors">
-              {isVocalOn ? <Volume2 size={18} className="text-emerald-primary" /> : <VolumeX size={18} className="text-nura-muted" />}
+            <button 
+              onClick={() => {
+                const textToSpeak = i18n.language === 'wo' && question.questionWo ? question.questionWo : question.question;
+                speak(textToSpeak, 'fr-FR')
+              }}
+              className="flex items-center gap-2 px-3 py-1 bg-emerald-light text-emerald-primary rounded-full hover:bg-emerald-primary hover:text-white transition-colors"
+            >
+              <Volume2 size={16} />
+              <span className="text-xs font-medium uppercase">Écouter</span>
             </button>
           </div>
         </div>
@@ -89,12 +97,12 @@ export default function Quiz() {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}>
             <h2 className="text-lg font-medium text-nura-text leading-relaxed mb-6">
-              {question.question}
+              {i18n.language === 'wo' && question.questionWo ? question.questionWo : question.question}
             </h2>
             <div className="flex flex-col gap-3">
               {shuffle([...question.options]).map((option, i) => (
-                <OptionButton key={i} option={option}
-                  onClick={handleOptionClick}
+                <OptionButton key={i} option={{ ...option, texte: i18n.language === 'wo' && option.texteWo ? option.texteWo : option.texte }}
+                  onClick={() => handleOptionClick(option)}
                   state={optionStates[option.texte] || 'idle'}
                   disabled={explicationVisible || optionStates[option.texte] === 'wrong'}
                 />
