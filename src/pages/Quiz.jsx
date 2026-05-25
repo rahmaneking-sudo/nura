@@ -43,15 +43,7 @@ export default function Quiz() {
       addScore(question.type, question.type === 'compatibilite' ? option.poids : 1)
       addReponse({ questionId: question.id, reponse: option.texte, correct: true })
       setExplicationVisible(true)
-      setTimeout(() => {
-        if (questionActuelle + 1 >= questions.length) {
-          terminer()
-          if (user) saveModuleScore(user.uid, moduleId, scoreConnaissance + 1, scoreCompatibilite)
-          navigate(`/resultats/${moduleId}`)
-        } else {
-          nextQuestion()
-        }
-      }, 8000)
+      setExplicationVisible(true)
     } else {
       addTentative()
       setOptionStates(s => ({ ...s, [option.texte]: 'wrong' }))
@@ -59,15 +51,7 @@ export default function Quiz() {
         const bonneReponse = question.options.find(o => o.correct)
         if (bonneReponse) setOptionStates(s => ({ ...s, [bonneReponse.texte]: 'correct' }))
         setExplicationVisible(true)
-        setTimeout(() => {
-          if (questionActuelle + 1 >= questions.length) {
-            terminer()
-            if (user) saveModuleScore(user.uid, moduleId, scoreConnaissance, scoreCompatibilite)
-            navigate(`/resultats/${moduleId}`)
-          } else {
-            nextQuestion()
-          }
-        }, 8000)
+        setExplicationVisible(true)
       } else {
         toast('Essaie encore — tu as une dernière chance !', { icon: '💡' })
       }
@@ -118,6 +102,31 @@ export default function Quiz() {
             </div>
             <ExplicationBlock question={question} visible={explicationVisible}
               correct={Object.values(optionStates).includes('correct')} />
+            {explicationVisible && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} 
+                className="mt-6 flex justify-end"
+              >
+                <button
+                  onClick={() => {
+                    const nextIndex = questionActuelle + 1;
+                    if (nextIndex >= questions.length) {
+                      terminer();
+                      if (user) {
+                        const finalScore = Object.values(optionStates).includes('correct') ? scoreConnaissance + 1 : scoreConnaissance;
+                        saveModuleScore(user.uid, moduleId, finalScore, scoreCompatibilite);
+                      }
+                      navigate(`/resultats/${moduleId}`);
+                    } else {
+                      nextQuestion();
+                    }
+                  }}
+                  className="bg-emerald-primary text-white font-medium px-6 py-3 rounded-full shadow-nura hover:bg-emerald-dark transition-all"
+                >
+                  {questionActuelle + 1 >= questions.length ? 'Terminer le module' : 'Question suivante'}
+                </button>
+              </motion.div>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
