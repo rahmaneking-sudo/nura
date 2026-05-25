@@ -29,7 +29,6 @@ export default function Quiz() {
   const question = questions[questionActuelle]
   const [optionStates, setOptionStates] = useState({})
   const [explicationVisible, setExplicationVisible] = useState(false)
-  const [explicationVisible, setExplicationVisible] = useState(false)
 
   useEffect(() => { if (moduleId) setModule(moduleId) }, [moduleId, setModule])
 
